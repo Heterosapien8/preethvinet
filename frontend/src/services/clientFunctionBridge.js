@@ -1,14 +1,20 @@
 import {
+  collection,
   doc,
   getDoc,
+  getDocs,
+  limit,
+  query,
   serverTimestamp,
   setDoc,
   updateDoc,
+  where,
   writeBatch,
 } from 'firebase/firestore'
 import { db } from '../config/firebase'
 import { COLLECTIONS } from '../config/constants'
 import { getAQICategory } from '../utils/aqiCalculator'
+import { sendViolationAlerts } from './emailAlertService'
 
 const BRIDGE_MODE = 'clientOrchestrated'
 const BRIDGE_ENABLED = import.meta.env.VITE_USE_CLIENT_FUNCTION_BRIDGE !== 'false'
@@ -186,6 +192,37 @@ async function getLocationContext(locationId) {
   return snap.exists() ? { id: snap.id, ...snap.data() } : null
 }
 
+async function getRegionalOfficeContext(roId) {
+  if (!roId) return null
+  const snap = await getDoc(doc(db, COLLECTIONS.REGIONAL_OFFICES, roId))
+  return snap.exists() ? { id: snap.id, ...snap.data() } : null
+}
+
+async function getIndustryContext(industryId) {
+  if (!industryId) return null
+  const snap = await getDoc(doc(db, COLLECTIONS.INDUSTRIES, industryId))
+  return snap.exists() ? { id: snap.id, ...snap.data() } : null
+}
+
+async function getSuperAdminRecipient() {
+  const envEmail = import.meta.env.VITE_ALERT_ADMIN_EMAIL || import.meta.env.VITE_SUPER_ADMIN_EMAIL
+  if (envEmail) return envEmail
+
+  try {
+    const userQuery = query(
+      collection(db, COLLECTIONS.USERS),
+      where('role', '==', 'superAdmin'),
+      limit(1)
+    )
+    const snapshot = await getDocs(userQuery)
+    if (snapshot.empty) return null
+    return snapshot.docs[0].data()?.email ?? null
+  } catch (error) {
+    console.warn('Unable to resolve super admin email for alerts:', error)
+    return null
+  }
+}
+
 async function incrementCityViolationCount(cityId) {
   const summaryRef = doc(db, COLLECTIONS.PUBLIC_SUMMARY, cityId)
   const summarySnap = await getDoc(summaryRef)
@@ -353,7 +390,12 @@ export async function orchestrateReadingSubmission({ readingType, readingId, rea
   if (!BRIDGE_ENABLED) return
 
   try {
-    const location = await getLocationContext(reading.locationId)
+    const [location, regionalOffice, industry, superAdminEmail] = await Promise.all([
+      getLocationContext(reading.locationId),
+      getRegionalOfficeContext(reading.roId),
+      getIndustryContext(reading.industryId),
+      getSuperAdminRecipient(),
+    ])
     const cityName = location?.city || reading.cityName || reading.roName || 'Unknown City'
     const cityId = slugifyCity(cityName)
 
@@ -379,6 +421,18 @@ export async function orchestrateReadingSubmission({ readingType, readingId, rea
       cityId,
       cityName,
     })
+
+    if (violatedParameters.length > 0) {
+      const primaryViolation = violatedParameters[0]
+      await sendViolationAlerts({
+        industryName: reading.industryName || industry?.name || 'Industry',
+        parameter: primaryViolation.parameter,
+        value: primaryViolation.measured,
+        limit: primaryViolation.limit,
+        roEmail: regionalOffice?.email || reading.roEmail || null,
+        superAdminEmail,
+      })
+    }
   } catch (error) {
     console.error('Client function bridge failed:', error)
   }
