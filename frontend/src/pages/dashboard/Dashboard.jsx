@@ -17,6 +17,7 @@ import {
 } from 'lucide-react'
 import { format } from 'date-fns'
 import clsx from 'clsx'
+import AIChatWidget from '../../components/ai/AIChatWidget'
 
 export default function Dashboard() {
   const { role, roId, userProfile } = useAuth()
@@ -451,6 +452,11 @@ export default function Dashboard() {
           )}
         </div>
       </div>
+
+      <AIChatWidget
+        variant="officer"
+        scope={{ role, roId, roName: userProfile?.roName }}
+      />
     </div>
   )
 }

@@ -109,10 +109,13 @@ export const INDUSTRY_TYPES = [
   'Chemical', 'Fertilizer', 'Paper', 'Sugar', 'Pharmaceutical', 'Other',
 ]
 
-// LM Studio config
-export const LM_STUDIO = {
-  BASE_URL: 'http://localhost:1234/v1',
-  MODEL:    'local-model',
+export const AI_CONFIG = {
+  provider: 'groq',
+  model: import.meta.env.VITE_GROQ_MODEL || 'llama-3.1-8b-instant',
+  apiKey: import.meta.env.VITE_GROQ_API_KEY || import.meta.env.VITE_GEMINI_API_KEY,
+  baseUrl: 'https://api.groq.com/openai/v1/chat/completions',
+  maxTokens: 400,
+  temperature: 0.1,
 }
 
 // Chhattisgarh map center

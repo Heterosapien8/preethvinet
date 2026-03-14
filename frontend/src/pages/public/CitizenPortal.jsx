@@ -5,6 +5,7 @@ import { COLLECTIONS } from '../../config/constants'
 import { getAQICategory } from '../../utils/aqiCalculator'
 import { Droplets, Activity, AlertTriangle, Wind } from 'lucide-react'
 import clsx from 'clsx'
+import AIChatWidget from '../../components/ai/AIChatWidget'
 
 function AQIDial({ aqi, category, color }) {
   const pct = Math.min((aqi ?? 0) / 500, 1)
@@ -258,6 +259,11 @@ export default function CitizenPortal() {
       <p className="text-center text-xs text-gray-400">
         Data refreshes every 30 minutes from monitoring stations across Chhattisgarh.
       </p>
+
+      <AIChatWidget
+        variant="citizen"
+        scope={{ cityId: selected?.cityId, cityName: selected?.cityName }}
+      />
     </div>
   )
 }
