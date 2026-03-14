@@ -5,12 +5,12 @@ import { useEffect, useRef } from 'react'
 import clsx from 'clsx'
 
 const TYPE_CONFIG = {
-  violation:       { icon: AlertTriangle, color: 'text-red-500',    bg: 'bg-red-50' },
-  missingReport:   { icon: FileWarning,   color: 'text-orange-500', bg: 'bg-orange-50' },
-  reportReminder:  { icon: Clock,         color: 'text-yellow-500', bg: 'bg-yellow-50' },
-  escalationUpdate:{ icon: Bell,          color: 'text-blue-500',   bg: 'bg-blue-50' },
-  reportLocked:    { icon: FileWarning,   color: 'text-red-500',    bg: 'bg-red-50' },
-  system:          { icon: Bell,          color: 'text-gray-500',   bg: 'bg-gray-50' },
+  violation:        { icon: AlertTriangle, color: 'text-white', bg: 'bg-red-600', body: 'text-red-50', meta: 'text-red-100/80' },
+  missingReport:    { icon: FileWarning, color: 'text-white', bg: 'bg-orange-500', body: 'text-orange-50', meta: 'text-orange-100/80' },
+  reportReminder:   { icon: Clock, color: 'text-white', bg: 'bg-amber-500', body: 'text-amber-50', meta: 'text-amber-100/80' },
+  escalationUpdate: { icon: Bell, color: 'text-white', bg: 'bg-primary-700', body: 'text-blue-50', meta: 'text-blue-100/80' },
+  reportLocked:     { icon: FileWarning, color: 'text-white', bg: 'bg-red-700', body: 'text-red-50', meta: 'text-red-100/80' },
+  system:           { icon: Bell, color: 'text-white', bg: 'bg-gray-700', body: 'text-gray-100', meta: 'text-gray-200/80' },
 }
 
 export default function NotificationPanel({ onClose }) {
@@ -76,27 +76,36 @@ export default function NotificationPanel({ onClose }) {
                 onClick={() => markAsRead(notif.id)}
                 className={clsx(
                   'flex gap-3 px-4 py-3 cursor-pointer transition-colors',
-                  notif.isRead ? 'bg-white hover:bg-gray-50' : `${config.bg} hover:opacity-90`
+                  notif.isRead ? 'bg-white hover:bg-gray-50' : `${config.bg} hover:brightness-95`
                 )}
               >
                 <div className={clsx('flex-shrink-0 mt-0.5', config.color)}>
                   <Icon size={16} />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium text-gray-800 leading-snug">
+                  <p className={clsx(
+                    'text-sm font-medium leading-snug',
+                    notif.isRead ? 'text-gray-800' : 'text-white'
+                  )}>
                     {notif.title}
                   </p>
-                  <p className="text-xs text-gray-500 mt-0.5 leading-snug line-clamp-2">
+                  <p className={clsx(
+                    'text-xs mt-0.5 leading-snug line-clamp-2',
+                    notif.isRead ? 'text-gray-500' : config.body
+                  )}>
                     {notif.body}
                   </p>
                   {ts && (
-                    <p className="text-[10px] text-gray-400 mt-1">
+                    <p className={clsx(
+                      'text-[10px] mt-1',
+                      notif.isRead ? 'text-gray-400' : config.meta
+                    )}>
                       {formatDistanceToNow(ts, { addSuffix: true })}
                     </p>
                   )}
                 </div>
                 {!notif.isRead && (
-                  <div className="flex-shrink-0 w-2 h-2 bg-primary-500 rounded-full mt-1.5" />
+                  <div className="flex-shrink-0 w-2 h-2 bg-white rounded-full mt-1.5" />
                 )}
               </div>
             )

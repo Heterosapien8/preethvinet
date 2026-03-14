@@ -1,0 +1,148 @@
+[debug] [2026-03-14T12:32:30.400Z] ----------------------------------------------------------------------
+[debug] [2026-03-14T12:32:30.402Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\kumar\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy --only firestore:rules
+[debug] [2026-03-14T12:32:30.402Z] CLI Version:   15.10.0
+[debug] [2026-03-14T12:32:30.402Z] Platform:      win32
+[debug] [2026-03-14T12:32:30.402Z] Node Version:  v22.18.0
+[debug] [2026-03-14T12:32:30.402Z] Time:          Sat Mar 14 2026 18:02:30 GMT+0530 (India Standard Time)
+[debug] [2026-03-14T12:32:30.402Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2026-03-14T12:32:33.656Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-03-14T12:32:33.656Z] > authorizing via signed-in user (kumar8888divyanshu@gmail.com)
+[debug] [2026-03-14T12:32:33.656Z] [iam] checking project sem3-minor for permissions ["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get"]
+[debug] [2026-03-14T12:32:33.657Z] Checked if tokens are valid: false, expires at: 1773443741679
+[debug] [2026-03-14T12:32:33.658Z] Checked if tokens are valid: false, expires at: 1773443741679
+[debug] [2026-03-14T12:32:33.658Z] > refreshing access token with scopes: []
+[debug] [2026-03-14T12:32:33.660Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2026-03-14T12:32:33.660Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2026-03-14T12:32:33.926Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2026-03-14T12:32:33.927Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2026-03-14T12:32:33.936Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/sem3-minor:testIamPermissions [none]
+[debug] [2026-03-14T12:32:33.937Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/sem3-minor:testIamPermissions  x-goog-user-project=sem3-minor
+[debug] [2026-03-14T12:32:33.937Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/sem3-minor:testIamPermissions {"permissions":["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get"]}
+[debug] [2026-03-14T12:32:35.433Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/sem3-minor:testIamPermissions 200
+[debug] [2026-03-14T12:32:35.434Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/sem3-minor:testIamPermissions {"permissions":["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get"]}
+[info] 
+[info] === Deploying to 'sem3-minor'...
+[info] 
+[info] i  deploying firestore 
+[info] i  firestore: ensuring required API firestore.googleapis.com is enabled... 
+[info] i  firestore: ensuring required API firestore.googleapis.com is enabled... 
+[debug] [2026-03-14T12:32:35.436Z] Checked if tokens are valid: true, expires at: 1773495152927
+[debug] [2026-03-14T12:32:35.436Z] Checked if tokens are valid: true, expires at: 1773495152927
+[debug] [2026-03-14T12:32:35.436Z] >>> [apiv2][query] GET https://firestore.googleapis.com/v1/projects/sem3-minor/databases/(default) [none]
+[debug] [2026-03-14T12:32:35.655Z] <<< [apiv2][status] GET https://firestore.googleapis.com/v1/projects/sem3-minor/databases/(default) 200
+[debug] [2026-03-14T12:32:35.655Z] <<< [apiv2][body] GET https://firestore.googleapis.com/v1/projects/sem3-minor/databases/(default) {"name":"projects/sem3-minor/databases/(default)","uid":"fb65d747-437e-449c-9faf-02b0c5d16d64","createTime":"2026-03-11T20:14:15.075321Z","updateTime":"2026-03-11T20:14:15.075321Z","locationId":"asia-south1","type":"FIRESTORE_NATIVE","concurrencyMode":"PESSIMISTIC","versionRetentionPeriod":"3600s","earliestVersionTime":"2026-03-14T11:32:36.480892Z","appEngineIntegrationMode":"DISABLED","keyPrefix":"j","pointInTimeRecoveryEnablement":"POINT_IN_TIME_RECOVERY_DISABLED","deleteProtectionState":"DELETE_PROTECTION_DISABLED","databaseEdition":"STANDARD","freeTier":true,"realtimeUpdatesMode":"REALTIME_UPDATES_MODE_ENABLED","etag":"IMjp8fGyn5MDMJKIovXUmJMD"}
+[info] i  firestore: reading indexes from firestore.indexes.json... 
+[info] i  cloud.firestore: checking firestore.rules for compilation errors... 
+[debug] [2026-03-14T12:32:35.657Z] Checked if tokens are valid: true, expires at: 1773495152927
+[debug] [2026-03-14T12:32:35.657Z] Checked if tokens are valid: true, expires at: 1773495152927
+[debug] [2026-03-14T12:32:35.658Z] >>> [apiv2][query] POST https://firebaserules.googleapis.com/v1/projects/sem3-minor:test [none]
+[debug] [2026-03-14T12:32:35.658Z] >>> [apiv2][body] POST https://firebaserules.googleapis.com/v1/projects/sem3-minor:test [omitted]
+[debug] [2026-03-14T12:32:37.196Z] <<< [apiv2][status] POST https://firebaserules.googleapis.com/v1/projects/sem3-minor:test 200
+[debug] [2026-03-14T12:32:37.196Z] <<< [apiv2][body] POST https://firebaserules.googleapis.com/v1/projects/sem3-minor:test {}
+[info] +  cloud.firestore: rules file firestore.rules compiled successfully 
+[debug] [2026-03-14T12:32:37.197Z] Checked if tokens are valid: true, expires at: 1773495152927
+[debug] [2026-03-14T12:32:37.197Z] Checked if tokens are valid: true, expires at: 1773495152927
+[debug] [2026-03-14T12:32:37.198Z] >>> [apiv2][query] GET https://firebaserules.googleapis.com/v1/projects/sem3-minor/releases pageSize=10&pageToken=
+[debug] [2026-03-14T12:32:38.516Z] <<< [apiv2][status] GET https://firebaserules.googleapis.com/v1/projects/sem3-minor/releases 200
+[debug] [2026-03-14T12:32:38.517Z] <<< [apiv2][body] GET https://firebaserules.googleapis.com/v1/projects/sem3-minor/releases {"releases":[{"name":"projects/sem3-minor/releases/cloud.firestore","rulesetName":"projects/sem3-minor/rulesets/c4066a15-ee76-486a-bee1-b5632c68845e","createTime":"2026-03-11T20:14:23.025589Z","updateTime":"2026-03-13T22:17:40.289812Z"}]}
+[debug] [2026-03-14T12:32:38.517Z] Checked if tokens are valid: true, expires at: 1773495152927
+[debug] [2026-03-14T12:32:38.517Z] Checked if tokens are valid: true, expires at: 1773495152927
+[debug] [2026-03-14T12:32:38.517Z] >>> [apiv2][query] GET https://firebaserules.googleapis.com/v1/projects/sem3-minor/rulesets/c4066a15-ee76-486a-bee1-b5632c68845e [none]
+[debug] [2026-03-14T12:32:39.878Z] <<< [apiv2][status] GET https://firebaserules.googleapis.com/v1/projects/sem3-minor/rulesets/c4066a15-ee76-486a-bee1-b5632c68845e 200
+[debug] [2026-03-14T12:32:39.878Z] <<< [apiv2][body] GET https://firebaserules.googleapis.com/v1/projects/sem3-minor/rulesets/c4066a15-ee76-486a-bee1-b5632c68845e [omitted]
+[info] i  firestore: uploading rules firestore.rules... 
+[debug] [2026-03-14T12:32:39.881Z] Checked if tokens are valid: true, expires at: 1773495152927
+[debug] [2026-03-14T12:32:39.881Z] Checked if tokens are valid: true, expires at: 1773495152927
+[debug] [2026-03-14T12:32:39.881Z] >>> [apiv2][query] POST https://firebaserules.googleapis.com/v1/projects/sem3-minor/rulesets [none]
+[debug] [2026-03-14T12:32:39.881Z] >>> [apiv2][body] POST https://firebaserules.googleapis.com/v1/projects/sem3-minor/rulesets [omitted]
+[debug] [2026-03-14T12:32:40.277Z] <<< [apiv2][status] POST https://firebaserules.googleapis.com/v1/projects/sem3-minor/rulesets 200
+[debug] [2026-03-14T12:32:40.277Z] <<< [apiv2][body] POST https://firebaserules.googleapis.com/v1/projects/sem3-minor/rulesets {"name":"projects/sem3-minor/rulesets/17fa7dab-958b-40f5-af7a-88875e80b9d9","source":{"files":[{"content":"rules_version = '2';\nservice cloud.firestore {\n  match /databases/{database}/documents {\n    // TEMPORARY MID-EVAL DEMO MODE:\n    // Open read access for selected collections so the local auth bypass\n    // can load data without a real Firebase token. Revert after evaluation.\n    function demoReadEnabled() { return true; }\n\n    function isAuth()       { return request.auth != null; }\n    function uid()          { return request.auth.uid; }\n    function userDoc()      { return get(/databases/$(database)/documents/users/$(uid())); }\n    function role()         { return userDoc().data.role; }\n    function isAdmin()      { return role() == 'superAdmin'; }\n    function isRO()         { return role() == 'regionalOfficer'; }\n    function isTeam()       { return role() == 'monitoringTeam'; }\n    function isIndustry()   { return role() == 'industryUser'; }\n    function userRoId()     { return userDoc().data.roId; }\n    function isTempBridgeWrite() {\n      return isAuth() &&\n             request.resource.data.bridgeMode == 'clientOrchestrated';\n    }\n\n    match /users/{userId} {\n      allow read: if isAuth() && (uid() == userId || isAdmin());\n      allow create: if isAdmin();\n      allow update: if isAdmin() || uid() == userId;\n      allow delete: if isAdmin();\n    }\n\n    match /regionalOffices/{id} {\n      allow read: if demoReadEnabled() || isAuth();\n      allow write: if isAdmin();\n    }\n\n    match /industries/{id} {\n      allow read: if demoReadEnabled() || isAuth();\n      allow write: if isAdmin() || isTempBridgeWrite();\n    }\n\n    match /monitoringLocations/{id} {\n      allow read: if demoReadEnabled() || isAuth();\n      allow write: if isAdmin() || isTempBridgeWrite();\n    }\n\n    match /units/{id} {\n      allow read: if demoReadEnabled() || isAuth();\n      allow write: if isAdmin();\n    }\n\n    match /prescribedLimits/{id} {\n      allow read: if demoReadEnabled() || isAuth();\n      allow write: if isAdmin();\n    }\n\n    match /monitoringTeams/{id} {\n      allow read: if demoReadEnabled() || isAuth();\n      allow write: if isAdmin();\n    }\n\n    match /airReadings/{id} {\n      allow read: if demoReadEnabled() || (isAuth() && (isAdmin() || isRO() || resource.data.roId == userRoId()));\n      allow create: if isAuth() && (isAdmin() || isRO() || isTeam() || isIndustry());\n      allow update: if isAdmin();\n      allow delete: if isAdmin();\n    }\n\n    match /waterReadings/{id} {\n      allow read: if demoReadEnabled() || (isAuth() && (isAdmin() || isRO() || resource.data.roId == userRoId()));\n      allow create: if isAuth() && (isAdmin() || isRO() || isTeam() || isIndustry());\n      allow update: if isAdmin();\n      allow delete: if isAdmin();\n    }\n\n    match /noiseReadings/{id} {\n      allow read: if demoReadEnabled() || (isAuth() && (isAdmin() || isRO() || resource.data.roId == userRoId()));\n      allow create: if isAuth() && (isAdmin() || isRO() || isTeam() || isIndustry());\n      allow update: if isAdmin();\n      allow delete: if isAdmin();\n    }\n\n    match /violations/{id} {\n      allow read: if demoReadEnabled() || (isAuth() && (isAdmin() || (isRO() && resource.data.roId == userRoId())));\n      allow write: if isTempBridgeWrite();\n    }\n\n    match /escalations/{id} {\n      allow read: if demoReadEnabled() || (isAuth() && (isAdmin() || (isRO() && resource.data.roId == userRoId())));\n      allow update: if (isAuth() && (isAdmin() || isRO())) || isTempBridgeWrite();\n      allow create: if isTempBridgeWrite();\n      allow delete: if isAdmin();\n\n      match /timeline/{entryId} {\n        allow read: if demoReadEnabled() || (isAuth() && (isAdmin() || isRO()));\n        allow write: if isTempBridgeWrite();\n      }\n    }\n\n    match /notifications/{id} {\n      allow read: if demoReadEnabled() || (isAuth() && (\n        isAdmin() ||\n        resource.data.recipientUid == uid() ||\n        resource.data.recipientRoId == userRoId()\n      ));\n      allow update: if (isAuth() && (\n        isAdmin() ||\n        resource.data.recipientUid == uid() ||\n        resource.data.recipientRoId == userRoId()\n      )) || isTempBridgeWrite();\n      allow create: if isTempBridgeWrite();\n      allow delete: if isAdmin();\n    }\n\n    match /reportLocks/{id} {\n      allow read: if demoReadEnabled() || isAuth();\n      allow write: if false;\n    }\n\n    match /forecasts/{id} {\n      allow read: if demoReadEnabled() || isAuth();\n      allow write: if false;\n    }\n\n    match /publicSummary/{id} {\n      allow read: if true;\n      allow write: if isTempBridgeWrite();\n    }\n\n    match /supportTickets/{id} {\n      allow read: if demoReadEnabled() || (isAuth() && (isAdmin() || resource.data.createdBy == uid()));\n      allow create: if isAuth();\n      allow update: if isAdmin();\n      allow delete: if isAdmin();\n    }\n  }\n}\n","name":"firestore.rules"}]},"createTime":"2026-03-14T12:32:40.965535Z","metadata":{"services":["cloud.firestore"]}}
+[debug] [2026-03-14T12:32:40.278Z] [rules] created ruleset projects/sem3-minor/rulesets/17fa7dab-958b-40f5-af7a-88875e80b9d9
+[debug] [2026-03-14T12:32:40.278Z] [rules] releasing cloud.firestore/(default) with ruleset projects/sem3-minor/rulesets/17fa7dab-958b-40f5-af7a-88875e80b9d9
+[debug] [2026-03-14T12:32:40.278Z] Checked if tokens are valid: true, expires at: 1773495152927
+[debug] [2026-03-14T12:32:40.278Z] Checked if tokens are valid: true, expires at: 1773495152927
+[debug] [2026-03-14T12:32:40.278Z] >>> [apiv2][query] PATCH https://firebaserules.googleapis.com/v1/projects/sem3-minor/releases/cloud.firestore/(default) [none]
+[debug] [2026-03-14T12:32:40.278Z] >>> [apiv2][body] PATCH https://firebaserules.googleapis.com/v1/projects/sem3-minor/releases/cloud.firestore/(default) {"release":{"name":"projects/sem3-minor/releases/cloud.firestore/(default)","rulesetName":"projects/sem3-minor/rulesets/17fa7dab-958b-40f5-af7a-88875e80b9d9"}}
+[debug] [2026-03-14T12:32:41.672Z] <<< [apiv2][status] PATCH https://firebaserules.googleapis.com/v1/projects/sem3-minor/releases/cloud.firestore/(default) 200
+[debug] [2026-03-14T12:32:41.672Z] <<< [apiv2][body] PATCH https://firebaserules.googleapis.com/v1/projects/sem3-minor/releases/cloud.firestore/(default) {"name":"projects/sem3-minor/releases/cloud.firestore","rulesetName":"projects/sem3-minor/rulesets/17fa7dab-958b-40f5-af7a-88875e80b9d9","createTime":"2026-03-11T20:14:23.025589Z","updateTime":"2026-03-14T12:32:42.365321Z"}
+[debug] [2026-03-14T12:32:41.672Z] [rules] updated release projects/sem3-minor/releases/cloud.firestore
+[info] +  firestore: released rules firestore.rules to cloud.firestore 
+[info] 
+[info] +  Deploy complete! 
+[info] 
+[info] Project Console: https://console.firebase.google.com/project/sem3-minor/overview
+[debug] [2026-03-14T13:33:58.883Z] ----------------------------------------------------------------------
+[debug] [2026-03-14T13:33:58.886Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\kumar\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy --only firestore:rules
+[debug] [2026-03-14T13:33:58.886Z] CLI Version:   15.10.0
+[debug] [2026-03-14T13:33:58.886Z] Platform:      win32
+[debug] [2026-03-14T13:33:58.887Z] Node Version:  v22.18.0
+[debug] [2026-03-14T13:33:58.887Z] Time:          Sat Mar 14 2026 19:03:58 GMT+0530 (India Standard Time)
+[debug] [2026-03-14T13:33:58.887Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2026-03-14T13:34:00.975Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-03-14T13:34:00.976Z] > authorizing via signed-in user (kumar8888divyanshu@gmail.com)
+[debug] [2026-03-14T13:34:00.976Z] [iam] checking project sem3-minor for permissions ["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get"]
+[debug] [2026-03-14T13:34:00.977Z] Checked if tokens are valid: false, expires at: 1773495152927
+[debug] [2026-03-14T13:34:00.977Z] Checked if tokens are valid: false, expires at: 1773495152927
+[debug] [2026-03-14T13:34:00.977Z] > refreshing access token with scopes: []
+[debug] [2026-03-14T13:34:00.979Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2026-03-14T13:34:00.979Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2026-03-14T13:34:01.240Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2026-03-14T13:34:01.240Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2026-03-14T13:34:01.251Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/sem3-minor:testIamPermissions [none]
+[debug] [2026-03-14T13:34:01.251Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/sem3-minor:testIamPermissions  x-goog-user-project=sem3-minor
+[debug] [2026-03-14T13:34:01.251Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/sem3-minor:testIamPermissions {"permissions":["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get"]}
+[debug] [2026-03-14T13:34:02.692Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/sem3-minor:testIamPermissions 200
+[debug] [2026-03-14T13:34:02.693Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/sem3-minor:testIamPermissions {"permissions":["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get"]}
+[info] 
+[info] === Deploying to 'sem3-minor'...
+[info] 
+[info] i  deploying firestore 
+[info] i  firestore: ensuring required API firestore.googleapis.com is enabled... 
+[info] i  firestore: ensuring required API firestore.googleapis.com is enabled... 
+[debug] [2026-03-14T13:34:02.695Z] Checked if tokens are valid: true, expires at: 1773498840241
+[debug] [2026-03-14T13:34:02.695Z] Checked if tokens are valid: true, expires at: 1773498840241
+[debug] [2026-03-14T13:34:02.695Z] >>> [apiv2][query] GET https://firestore.googleapis.com/v1/projects/sem3-minor/databases/(default) [none]
+[debug] [2026-03-14T13:34:02.927Z] <<< [apiv2][status] GET https://firestore.googleapis.com/v1/projects/sem3-minor/databases/(default) 200
+[debug] [2026-03-14T13:34:02.928Z] <<< [apiv2][body] GET https://firestore.googleapis.com/v1/projects/sem3-minor/databases/(default) {"name":"projects/sem3-minor/databases/(default)","uid":"fb65d747-437e-449c-9faf-02b0c5d16d64","createTime":"2026-03-11T20:14:15.075321Z","updateTime":"2026-03-11T20:14:15.075321Z","locationId":"asia-south1","type":"FIRESTORE_NATIVE","concurrencyMode":"PESSIMISTIC","versionRetentionPeriod":"3600s","earliestVersionTime":"2026-03-14T12:34:03.830157Z","appEngineIntegrationMode":"DISABLED","keyPrefix":"j","pointInTimeRecoveryEnablement":"POINT_IN_TIME_RECOVERY_DISABLED","deleteProtectionState":"DELETE_PROTECTION_DISABLED","databaseEdition":"STANDARD","freeTier":true,"realtimeUpdatesMode":"REALTIME_UPDATES_MODE_ENABLED","etag":"IJXhk9DAn5MDMJKIovXUmJMD"}
+[info] i  firestore: reading indexes from firestore.indexes.json... 
+[info] i  cloud.firestore: checking firestore.rules for compilation errors... 
+[debug] [2026-03-14T13:34:02.931Z] Checked if tokens are valid: true, expires at: 1773498840241
+[debug] [2026-03-14T13:34:02.931Z] Checked if tokens are valid: true, expires at: 1773498840241
+[debug] [2026-03-14T13:34:02.932Z] >>> [apiv2][query] POST https://firebaserules.googleapis.com/v1/projects/sem3-minor:test [none]
+[debug] [2026-03-14T13:34:02.932Z] >>> [apiv2][body] POST https://firebaserules.googleapis.com/v1/projects/sem3-minor:test [omitted]
+[debug] [2026-03-14T13:34:04.468Z] <<< [apiv2][status] POST https://firebaserules.googleapis.com/v1/projects/sem3-minor:test 200
+[debug] [2026-03-14T13:34:04.468Z] <<< [apiv2][body] POST https://firebaserules.googleapis.com/v1/projects/sem3-minor:test {}
+[info] +  cloud.firestore: rules file firestore.rules compiled successfully 
+[debug] [2026-03-14T13:34:04.469Z] Checked if tokens are valid: true, expires at: 1773498840241
+[debug] [2026-03-14T13:34:04.469Z] Checked if tokens are valid: true, expires at: 1773498840241
+[debug] [2026-03-14T13:34:04.469Z] >>> [apiv2][query] GET https://firebaserules.googleapis.com/v1/projects/sem3-minor/releases pageSize=10&pageToken=
+[debug] [2026-03-14T13:34:05.814Z] <<< [apiv2][status] GET https://firebaserules.googleapis.com/v1/projects/sem3-minor/releases 200
+[debug] [2026-03-14T13:34:05.815Z] <<< [apiv2][body] GET https://firebaserules.googleapis.com/v1/projects/sem3-minor/releases {"releases":[{"name":"projects/sem3-minor/releases/cloud.firestore","rulesetName":"projects/sem3-minor/rulesets/17fa7dab-958b-40f5-af7a-88875e80b9d9","createTime":"2026-03-11T20:14:23.025589Z","updateTime":"2026-03-14T12:32:42.365321Z"}]}
+[debug] [2026-03-14T13:34:05.815Z] Checked if tokens are valid: true, expires at: 1773498840241
+[debug] [2026-03-14T13:34:05.815Z] Checked if tokens are valid: true, expires at: 1773498840241
+[debug] [2026-03-14T13:34:05.815Z] >>> [apiv2][query] GET https://firebaserules.googleapis.com/v1/projects/sem3-minor/rulesets/17fa7dab-958b-40f5-af7a-88875e80b9d9 [none]
+[debug] [2026-03-14T13:34:07.087Z] <<< [apiv2][status] GET https://firebaserules.googleapis.com/v1/projects/sem3-minor/rulesets/17fa7dab-958b-40f5-af7a-88875e80b9d9 200
+[debug] [2026-03-14T13:34:07.087Z] <<< [apiv2][body] GET https://firebaserules.googleapis.com/v1/projects/sem3-minor/rulesets/17fa7dab-958b-40f5-af7a-88875e80b9d9 [omitted]
+[info] i  firestore: uploading rules firestore.rules... 
+[debug] [2026-03-14T13:34:07.087Z] Checked if tokens are valid: true, expires at: 1773498840241
+[debug] [2026-03-14T13:34:07.088Z] Checked if tokens are valid: true, expires at: 1773498840241
+[debug] [2026-03-14T13:34:07.088Z] >>> [apiv2][query] POST https://firebaserules.googleapis.com/v1/projects/sem3-minor/rulesets [none]
+[debug] [2026-03-14T13:34:07.088Z] >>> [apiv2][body] POST https://firebaserules.googleapis.com/v1/projects/sem3-minor/rulesets [omitted]
+[debug] [2026-03-14T13:34:07.477Z] <<< [apiv2][status] POST https://firebaserules.googleapis.com/v1/projects/sem3-minor/rulesets 200
+[debug] [2026-03-14T13:34:07.477Z] <<< [apiv2][body] POST https://firebaserules.googleapis.com/v1/projects/sem3-minor/rulesets {"name":"projects/sem3-minor/rulesets/2be65a31-a7fa-4c1e-96b9-b0049db7cd8d","source":{"files":[{"content":"rules_version = '2';\nservice cloud.firestore {\n  match /databases/{database}/documents {\n\n    function isAuth()       { return request.auth != null; }\n    function uid()          { return request.auth.uid; }\n    function userDoc()      { return get(/databases/$(database)/documents/users/$(uid())); }\n    function role()         { return userDoc().data.role; }\n    function isAdmin()      { return role() == 'superAdmin'; }\n    function isRO()         { return role() == 'regionalOfficer'; }\n    function isTeam()       { return role() == 'monitoringTeam'; }\n    function isIndustry()   { return role() == 'industryUser'; }\n    function userRoId()     { return userDoc().data.roId; }\n    function isTempBridgeWrite() {\n      return isAuth() &&\n             request.resource.data.bridgeMode == 'clientOrchestrated';\n    }\n\n    match /users/{userId} {\n      allow read:  if isAuth() && (uid() == userId || isAdmin());\n      allow create: if isAdmin();\n      allow update: if isAdmin() || uid() == userId;\n      allow delete: if isAdmin();\n    }\n\n    match /regionalOffices/{id} {\n      allow read:  if isAuth();\n      allow write: if isAdmin();\n    }\n    match /industries/{id} {\n      allow read:  if isAuth();\n      allow write: if isAdmin() || isTempBridgeWrite();\n    }\n    match /monitoringLocations/{id} {\n      allow read:  if isAuth();\n      allow write: if isAdmin() || isTempBridgeWrite();\n    }\n    match /units/{id} {\n      allow read:  if isAuth();\n      allow write: if isAdmin();\n    }\n    match /prescribedLimits/{id} {\n      allow read:  if isAuth();\n      allow write: if isAdmin();\n    }\n    match /monitoringTeams/{id} {\n      allow read:  if isAuth();\n      allow write: if isAdmin();\n    }\n\n    match /airReadings/{id} {\n      allow read:  if isAuth() && (isAdmin() || isRO() || resource.data.roId == userRoId());\n      allow create: if isAuth() && (isAdmin() || isRO() || isTeam() || isIndustry());\n      allow update: if isAdmin();\n      allow delete: if isAdmin();\n    }\n    match /waterReadings/{id} {\n      allow read:  if isAuth() && (isAdmin() || isRO() || resource.data.roId == userRoId());\n      allow create: if isAuth() && (isAdmin() || isRO() || isTeam() || isIndustry());\n      allow update: if isAdmin();\n      allow delete: if isAdmin();\n    }\n    match /noiseReadings/{id} {\n      allow read:  if isAuth() && (isAdmin() || isRO() || resource.data.roId == userRoId());\n      allow create: if isAuth() && (isAdmin() || isRO() || isTeam() || isIndustry());\n      allow update: if isAdmin();\n      allow delete: if isAdmin();\n    }\n\n    match /violations/{id} {\n      allow read:  if isAuth() && (isAdmin() || (isRO() && resource.data.roId == userRoId()));\n      allow write: if isTempBridgeWrite();\n    }\n\n    match /escalations/{id} {\n      allow read:  if isAuth() && (isAdmin() || (isRO() && resource.data.roId == userRoId()));\n      allow update: if (isAuth() && (isAdmin() || isRO())) || isTempBridgeWrite();\n      allow create: if isTempBridgeWrite();\n      allow delete: if isAdmin();\n      match /timeline/{entryId} {\n        allow read:  if isAuth() && (isAdmin() || isRO());\n        allow write: if isTempBridgeWrite();\n      }\n    }\n\n    match /notifications/{id} {\n      allow read:  if isAuth() && (isAdmin() ||\n                     resource.data.recipientUid  == uid() ||\n                     resource.data.recipientRoId == userRoId());\n      allow update: if (isAuth() && (isAdmin() ||\n                     resource.data.recipientUid  == uid() ||\n                     resource.data.recipientRoId == userRoId())) || isTempBridgeWrite();\n      allow create: if isTempBridgeWrite();\n      allow delete: if isAdmin();\n    }\n\n    match /reportLocks/{id} {\n      allow read:  if isAuth();\n      allow write: if false;\n    }\n\n    match /forecasts/{id} {\n      allow read:  if isAuth();\n      allow write: if false;\n    }\n\n    match /publicSummary/{id} {\n      allow read:  if true;\n      allow write: if isTempBridgeWrite();\n    }\n\n    match /supportTickets/{id} {\n      allow read:  if isAuth() && (isAdmin() || resource.data.createdBy == uid());\n      allow create: if isAuth();\n      allow update: if isAdmin();\n      allow delete: if isAdmin();\n    }\n  }\n}\n","name":"firestore.rules"}]},"createTime":"2026-03-14T13:34:08.245839Z","metadata":{"services":["cloud.firestore"]}}
+[debug] [2026-03-14T13:34:07.477Z] [rules] created ruleset projects/sem3-minor/rulesets/2be65a31-a7fa-4c1e-96b9-b0049db7cd8d
+[debug] [2026-03-14T13:34:07.477Z] [rules] releasing cloud.firestore/(default) with ruleset projects/sem3-minor/rulesets/2be65a31-a7fa-4c1e-96b9-b0049db7cd8d
+[debug] [2026-03-14T13:34:07.478Z] Checked if tokens are valid: true, expires at: 1773498840241
+[debug] [2026-03-14T13:34:07.478Z] Checked if tokens are valid: true, expires at: 1773498840241
+[debug] [2026-03-14T13:34:07.478Z] >>> [apiv2][query] PATCH https://firebaserules.googleapis.com/v1/projects/sem3-minor/releases/cloud.firestore/(default) [none]
+[debug] [2026-03-14T13:34:07.478Z] >>> [apiv2][body] PATCH https://firebaserules.googleapis.com/v1/projects/sem3-minor/releases/cloud.firestore/(default) {"release":{"name":"projects/sem3-minor/releases/cloud.firestore/(default)","rulesetName":"projects/sem3-minor/rulesets/2be65a31-a7fa-4c1e-96b9-b0049db7cd8d"}}
+[debug] [2026-03-14T13:34:08.866Z] <<< [apiv2][status] PATCH https://firebaserules.googleapis.com/v1/projects/sem3-minor/releases/cloud.firestore/(default) 200
+[debug] [2026-03-14T13:34:08.866Z] <<< [apiv2][body] PATCH https://firebaserules.googleapis.com/v1/projects/sem3-minor/releases/cloud.firestore/(default) {"name":"projects/sem3-minor/releases/cloud.firestore","rulesetName":"projects/sem3-minor/rulesets/2be65a31-a7fa-4c1e-96b9-b0049db7cd8d","createTime":"2026-03-11T20:14:23.025589Z","updateTime":"2026-03-14T13:34:09.633831Z"}
+[debug] [2026-03-14T13:34:08.866Z] [rules] updated release projects/sem3-minor/releases/cloud.firestore
+[info] +  firestore: released rules firestore.rules to cloud.firestore 
+[info] 
+[info] +  Deploy complete! 
+[info] 
+[info] Project Console: https://console.firebase.google.com/project/sem3-minor/overview

@@ -36,15 +36,15 @@ function AQIDial({ aqi, category, color }) {
 }
 
 const WATER_BADGE = {
-  safe: { label: 'Safe', color: 'bg-green-100 text-green-700' },
-  caution: { label: 'Caution', color: 'bg-yellow-100 text-yellow-700' },
-  unsafe: { label: 'Unsafe', color: 'bg-red-100 text-red-700' },
+  safe: { label: 'Safe', color: 'bg-emerald-600 text-white' },
+  caution: { label: 'Caution', color: 'bg-amber-500 text-white' },
+  unsafe: { label: 'Unsafe', color: 'bg-red-600 text-white' },
 }
 
 function getNoiseStatus(level) {
-  if ((level ?? 0) > 70) return { label: 'High', color: 'text-red-600 bg-red-50' }
-  if ((level ?? 0) > 55) return { label: 'Moderate', color: 'text-orange-600 bg-orange-50' }
-  return { label: 'Normal', color: 'text-green-600 bg-green-50' }
+  if ((level ?? 0) > 70) return { label: 'High', color: 'bg-red-600 text-white' }
+  if ((level ?? 0) > 55) return { label: 'Moderate', color: 'bg-orange-500 text-white' }
+  return { label: 'Normal', color: 'bg-emerald-600 text-white' }
 }
 
 export default function CitizenPortal() {
@@ -100,31 +100,31 @@ export default function CitizenPortal() {
   ] : []
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-8 space-y-8">
-      <div className="card">
-        <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+    <div className="mx-auto max-w-[1600px] px-6 py-6 space-y-8 bg-[#f3f1ef]">
+      <div className="border border-gray-200 bg-white px-8 py-6 shadow-sm">
+        <div className="flex flex-col gap-5 xl:flex-row xl:items-center xl:justify-between">
           <div>
             <p className="text-[10px] uppercase tracking-[0.35em] text-gray-400 mb-2">
               Citizen transparency portal
             </p>
-            <h1 className="page-title !text-3xl !font-semibold !text-gray-900">
+            <h1 className="page-title !text-3xl !font-semibold !text-gray-900 md:!text-4xl">
               Air, Water and Noise Quality Dashboard
             </h1>
-            <p className="text-sm text-gray-400 mt-2">
+            <p className="text-base text-gray-400 mt-2">
               Public environmental data for monitored cities across Chhattisgarh
             </p>
           </div>
 
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-3 xl:flex-nowrap">
             {summaries.map((summary) => (
               <button
                 key={summary.cityId}
                 onClick={() => setSelectedCity(summary.cityId)}
                 className={clsx(
-                  'px-4 py-2 rounded-full text-sm font-medium transition-colors',
+                  'min-w-[122px] px-6 py-3 rounded-full text-sm font-semibold transition-colors border',
                   selectedCity === summary.cityId
-                    ? 'bg-primary-700 text-white'
-                    : 'bg-white border border-gray-200 text-gray-600 hover:bg-primary-50'
+                    ? 'bg-primary-700 border-primary-700 text-white shadow-sm'
+                    : 'bg-white border-gray-200 text-gray-600 hover:bg-primary-50'
                 )}
               >
                 {summary.cityName}
@@ -135,29 +135,31 @@ export default function CitizenPortal() {
       </div>
 
       {loading ? (
-        <div className="card py-16 text-center">
+        <div className="border border-gray-200 bg-white py-16 text-center">
           <div className="w-8 h-8 border-4 border-primary-500 border-t-transparent rounded-full animate-spin mx-auto" />
         </div>
       ) : selected ? (
         <>
-          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-            {kpiCards.map((card) => {
-              const Icon = card.icon
-              return (
-                <div key={card.title} className={`rounded-[24px] bg-gradient-to-br ${card.shell} text-white p-5 shadow-sm min-h-[156px]`}>
-                  <div className="flex items-start justify-between gap-3">
-                    <p className="text-[10px] uppercase tracking-[0.28em] text-white/75">{card.title}</p>
-                    <div className="rounded-2xl bg-white/15 p-2.5">
-                      <Icon size={16} className="text-white" />
+          <div className="bg-[#ece9e6] px-6 py-6">
+            <div className="mx-auto grid max-w-[1360px] gap-4 md:grid-cols-2 xl:grid-cols-4">
+              {kpiCards.map((card) => {
+                const Icon = card.icon
+                return (
+                  <div key={card.title} className={`rounded-[30px] bg-gradient-to-br ${card.shell} text-white p-6 shadow-sm min-h-[192px]`}>
+                    <div className="flex items-start justify-between gap-3">
+                      <p className="text-[10px] uppercase tracking-[0.35em] text-white/75">{card.title}</p>
+                      <div className="rounded-full bg-white/15 p-3">
+                        <Icon size={18} className="text-white" />
+                      </div>
+                    </div>
+                    <div className="mt-10">
+                      <p className="text-5xl font-semibold leading-none">{card.value}</p>
+                      <p className="text-sm text-white/78 mt-4">{card.detail}</p>
                     </div>
                   </div>
-                  <div className="mt-6">
-                    <p className="text-4xl font-semibold leading-none">{card.value}</p>
-                    <p className="text-xs text-white/80 mt-3">{card.detail}</p>
-                  </div>
-                </div>
-              )
-            })}
+                )
+              })}
+            </div>
           </div>
 
           <div className="grid gap-5 xl:grid-cols-[1.4fr_1fr]">
@@ -242,7 +244,7 @@ export default function CitizenPortal() {
           </div>
 
           {selected.activeViolations > 0 && (
-            <div className="p-4 bg-orange-50 border border-orange-200 rounded-xl text-sm text-orange-700 text-center">
+            <div className="alert-solid-warning text-sm text-center">
               There are currently {selected.activeViolations} active environmental violation{selected.activeViolations > 1 ? 's' : ''} under investigation in {selected.cityName}. The department is taking corrective action.
             </div>
           )}

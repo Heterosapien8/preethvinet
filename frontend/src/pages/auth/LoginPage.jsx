@@ -77,9 +77,9 @@ export default function LoginPage() {
           <form onSubmit={handleSubmit} className="space-y-4">
             {/* Error banner */}
             {(error || authError) && (
-              <div className="flex items-center gap-2 p-3 bg-red-50 border border-red-200 rounded-lg">
-                <AlertCircle size={16} className="text-red-500 flex-shrink-0" />
-                <p className="text-sm text-red-700">{error || authError}</p>
+              <div className="alert-solid-error flex items-center gap-2 rounded-lg">
+                <AlertCircle size={16} className="text-white flex-shrink-0" />
+                <p className="text-sm text-white">{error || authError}</p>
               </div>
             )}
 

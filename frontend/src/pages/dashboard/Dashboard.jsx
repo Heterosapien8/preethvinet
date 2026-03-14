@@ -221,7 +221,7 @@ export default function Dashboard() {
       </div>
 
       {violations.length > 0 && (
-        <div className="flex items-center gap-3 p-4 bg-red-50 border border-red-200 rounded-xl text-red-700 animate-pulse">
+        <div className="alert-solid-error flex items-center gap-3 animate-pulse">
           <AlertTriangle size={20} className="flex-shrink-0" />
           <p className="text-sm font-medium">
             {violations.length} active violation{violations.length > 1 ? 's' : ''} detected.

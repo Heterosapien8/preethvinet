@@ -6,6 +6,7 @@ dist/
 .vite/
 frontend/.vite/
 serviceAccountKey.json
+scripts/serviceAccountKey.json
 .env
 .env.*
 npm-debug.log*

@@ -151,14 +151,14 @@ export default function MasterFormPage({ config }) {
         <div className="card">
           {/* Error banner */}
           {errors._form && (
-            <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-sm text-red-700">
+            <div className="mb-4 alert-solid-error rounded-lg text-sm">
               {errors._form}
             </div>
           )}
 
           {/* Success banner */}
           {success && (
-            <div className="mb-4 p-3 bg-green-50 border border-green-200 rounded-lg text-sm text-green-700">
+            <div className="mb-4 alert-solid-success rounded-lg text-sm">
               Saved successfully! Redirecting...
             </div>
           )}

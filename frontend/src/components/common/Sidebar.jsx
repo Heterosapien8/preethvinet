@@ -4,11 +4,12 @@ import {
   LayoutDashboard, Building2, Factory, Ruler, AlertTriangle,
   MapPin, Users, UserCog, Wind, Droplets, Volume2, BarChart3,
   Map, TrendingUp, ShieldCheck, Globe, Ticket, ChevronDown,
-  ChevronRight, Leaf, LogOut, Settings,
+  ChevronRight, LogOut, Settings,
 } from 'lucide-react'
 import { useAuth } from '../../contexts/AuthContext'
 import { ROLES } from '../../config/constants'
 import clsx from 'clsx'
+import cecbLogo from '../../assets/cecb-logo.svg'
 
 // ─────────────────────────────────────────────────────────────
 //  Navigation structure — role-filtered in the component
@@ -111,37 +112,53 @@ export default function Sidebar({ collapsed, onToggle }) {
   return (
     <aside className={clsx(
       'flex flex-col h-full bg-primary-700 text-white transition-all duration-300',
-      collapsed ? 'w-16' : 'w-64'
+      collapsed ? 'w-16' : 'w-[320px]'
     )}>
       {/* Logo */}
-      <div className="flex items-center gap-3 px-4 py-4 border-b border-primary-600">
-        <div className="flex-shrink-0 w-8 h-8 bg-eco-400 rounded-lg flex items-center justify-center">
-          <Leaf size={18} className="text-white" />
+      <div className={clsx(
+        'border-b border-primary-600',
+        collapsed
+          ? 'flex justify-center px-0 py-5'
+          : 'flex items-center gap-4 px-5 py-5'
+      )}>
+        <div className="flex h-11 w-11 flex-shrink-0 items-center justify-center overflow-hidden rounded-xl bg-white/12 p-1">
+          <img src={cecbLogo} alt="CECB" className="h-full w-full object-contain" />
         </div>
         {!collapsed && (
           <div>
-            <p className="font-bold text-sm leading-tight">PrithviNet</p>
-            <p className="text-primary-300 text-xs leading-tight">CG Environment Dept.</p>
+            <p className="font-bold text-base leading-tight">PrithviNet</p>
+            <p className="text-primary-300 text-sm leading-tight">CECB</p>
           </div>
         )}
       </div>
 
       {/* Role badge */}
       {!collapsed && (
-        <div className="px-4 py-3 border-b border-primary-600">
-          <p className="text-xs text-primary-300 uppercase tracking-wider mb-1">Logged in as</p>
-          <p className="text-sm font-medium truncate">{userProfile?.name ?? 'User'}</p>
-          <span className="inline-block mt-1 px-2 py-0.5 bg-primary-600 rounded text-xs text-primary-200">
-            {getRoleLabel(role)}
-          </span>
-          {userProfile?.roName && (
-            <p className="text-xs text-primary-300 mt-0.5 truncate">{userProfile.roName}</p>
-          )}
+        <div className="px-5 py-4 border-b border-primary-600">
+          <div className="rounded-2xl border border-primary-600 bg-primary-600/40 px-4 py-4">
+            <p className="text-xs text-primary-300 uppercase tracking-wider mb-2">Logged in as</p>
+            <div className="flex items-start justify-between gap-3">
+              <div className="min-w-0 flex-1">
+                <p className="text-xl font-semibold leading-tight text-white truncate">
+                  {userProfile?.name ?? 'User'}
+                </p>
+                {userProfile?.roName && (
+                  <p className="text-xs text-primary-200/90 mt-1 truncate">{userProfile.roName}</p>
+                )}
+              </div>
+              <span className="inline-flex flex-shrink-0 items-center rounded-xl bg-primary-500 px-3 py-1.5 text-xs font-medium text-white">
+                {getRoleLabel(role)}
+              </span>
+            </div>
+          </div>
         </div>
       )}
 
       {/* Navigation */}
-      <nav className="flex-1 overflow-y-auto py-3 space-y-0.5 px-2">
+      <nav className={clsx(
+        'flex-1 overflow-y-auto py-4 space-y-1',
+        collapsed ? 'px-2' : 'px-3'
+      )}>
         {visibleItems.map(item => {
           if (item.children) {
             const isOpen = openGroups.includes(item.label)
@@ -150,9 +167,10 @@ export default function Sidebar({ collapsed, onToggle }) {
               <div key={item.label}>
                 <button
                   onClick={() => toggleGroup(item.label)}
-                  className="w-full flex items-center gap-3 px-3 py-2 rounded-lg
-                             text-primary-200 hover:bg-primary-600 hover:text-white
-                             transition-colors text-sm font-medium"
+                  className={clsx(
+                    'w-full flex items-center rounded-xl text-primary-200 hover:bg-primary-600 hover:text-white transition-colors text-sm font-medium',
+                    collapsed ? 'justify-center px-0 py-3' : 'gap-3 px-4 py-2.5'
+                  )}
                 >
                   <Icon size={18} className="flex-shrink-0" />
                   {!collapsed && (
@@ -166,7 +184,7 @@ export default function Sidebar({ collapsed, onToggle }) {
                   )}
                 </button>
                 {isOpen && !collapsed && (
-                  <div className="mt-0.5 ml-4 space-y-0.5">
+                  <div className="mt-1 ml-5 space-y-1">
                     {item.children.map(child => {
                       const ChildIcon = child.icon
                       return (
@@ -174,7 +192,7 @@ export default function Sidebar({ collapsed, onToggle }) {
                           key={child.path}
                           to={child.path}
                           className={({ isActive }) => clsx(
-                            'flex items-center gap-3 px-3 py-1.5 rounded-lg text-xs transition-colors',
+                            'flex items-center gap-3 px-4 py-2 rounded-xl text-xs transition-colors',
                             isActive
                               ? 'bg-primary-500 text-white font-medium'
                               : 'text-primary-300 hover:bg-primary-600 hover:text-white'
@@ -198,7 +216,8 @@ export default function Sidebar({ collapsed, onToggle }) {
               to={item.path}
               target={item.external ? '_blank' : undefined}
               className={({ isActive }) => clsx(
-                'flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors',
+                'flex items-center rounded-xl text-sm transition-colors',
+                collapsed ? 'justify-center px-0 py-3' : 'gap-3 px-4 py-2.5',
                 isActive
                   ? 'bg-eco-500 text-white font-medium'
                   : 'text-primary-200 hover:bg-primary-600 hover:text-white'
@@ -212,12 +231,16 @@ export default function Sidebar({ collapsed, onToggle }) {
       </nav>
 
       {/* Logout */}
-      <div className="px-2 py-3 border-t border-primary-600">
+      <div className={clsx(
+        'py-4 border-t border-primary-600',
+        collapsed ? 'px-2' : 'px-3'
+      )}>
         <button
           onClick={handleLogout}
-          className="w-full flex items-center gap-3 px-3 py-2 rounded-lg
-                     text-primary-300 hover:bg-primary-600 hover:text-white
-                     transition-colors text-sm"
+          className={clsx(
+            'w-full flex items-center rounded-xl text-primary-300 hover:bg-primary-600 hover:text-white transition-colors text-sm',
+            collapsed ? 'justify-center px-0 py-3' : 'gap-3 px-4 py-2.5'
+          )}
         >
           <LogOut size={18} className="flex-shrink-0" />
           {!collapsed && <span>Logout</span>}

@@ -101,4 +101,24 @@
     @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium
            bg-yellow-100 text-yellow-800;
   }
+
+  .alert-solid {
+    @apply rounded-xl border px-4 py-4;
+  }
+
+  .alert-solid-error {
+    @apply alert-solid bg-red-600 border-red-700 text-white;
+  }
+
+  .alert-solid-warning {
+    @apply alert-solid bg-orange-500 border-orange-600 text-white;
+  }
+
+  .alert-solid-info {
+    @apply alert-solid bg-primary-700 border-primary-800 text-white;
+  }
+
+  .alert-solid-success {
+    @apply alert-solid bg-emerald-600 border-emerald-700 text-white;
+  }
 }

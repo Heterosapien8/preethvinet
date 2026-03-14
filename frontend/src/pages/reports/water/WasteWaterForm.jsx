@@ -4,6 +4,7 @@ import { collection, addDoc, getDocs, serverTimestamp, query, orderBy } from 'fi
 import { db } from '../../../config/firebase'
 import { useAuth } from '../../../contexts/AuthContext'
 import { COLLECTIONS } from '../../../config/constants'
+import { orchestrateReadingSubmission } from '../../../services/clientFunctionBridge'
 import { ArrowLeft, PlusCircle, Save } from 'lucide-react'
 
 const WASTE_PARAMS = [
@@ -128,7 +129,7 @@ export default function WasteWaterForm() {
         oilAndGrease: computeAverage(samplesWithFlags, 'oilAndGrease'),
       }
 
-      await addDoc(collection(db, COLLECTIONS.WATER_READINGS), {
+      const payload = {
         roId,
         roName,
         industryId: form.industryId,
@@ -159,6 +160,13 @@ export default function WasteWaterForm() {
         isSimulated: false,
         submittedBy: currentUser.uid,
         createdAt: serverTimestamp(),
+      }
+
+      const readingRef = await addDoc(collection(db, COLLECTIONS.WATER_READINGS), payload)
+      await orchestrateReadingSubmission({
+        readingType: 'water',
+        readingId: readingRef.id,
+        reading: payload,
       })
 
       navigate('/reports/water')
@@ -184,7 +192,7 @@ export default function WasteWaterForm() {
 
       <form onSubmit={handleSubmit} className="space-y-5">
         {errors._form && (
-          <div className="p-3 bg-red-50 border border-red-200 rounded-lg text-sm text-red-700">{errors._form}</div>
+          <div className="alert-solid-error rounded-lg text-sm">{errors._form}</div>
         )}
 
         <div className="card">
@@ -213,8 +221,8 @@ export default function WasteWaterForm() {
               {errors.industryId && <p className="text-xs text-red-500 mt-1">{errors.industryId}</p>}
             </div>
             <div>
-              <label className="block text-xs font-medium text-gray-600 mb-1">Location</label>
-              <select value={form.locationId} onChange={(e) => setField('locationId', e.target.value)} className="input-base">
+              <label className="block text-xs font-medium text-gray-600 mb-1">Location <span className="text-red-500">*</span></label>
+              <select value={form.locationId} onChange={(e) => setField('locationId', e.target.value)} className={`input-base ${errors.locationId ? 'border-red-400' : ''}`}>
                 <option value="">-- Select Location --</option>
                 {locations.filter((location) => location.type === 'water' || location.type === 'multi').map((location) => (
                   <option key={location.id} value={location.id}>{location.name}</option>

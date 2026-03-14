@@ -4,6 +4,7 @@ import { collection, addDoc, getDocs, serverTimestamp, query, orderBy } from 'fi
 import { db } from '../../../config/firebase'
 import { useAuth } from '../../../contexts/AuthContext'
 import { COLLECTIONS, NOISE_LIMITS, NOISE_ZONES } from '../../../config/constants'
+import { orchestrateReadingSubmission } from '../../../services/clientFunctionBridge'
 import { ArrowLeft, PlusCircle, Trash2, Save } from 'lucide-react'
 
 const emptyRow = () => ({ locationName: '', zone: 'industrial', monitoringTime: 'Day', noiseLevel: '' })
@@ -97,7 +98,7 @@ export default function NoiseMonitoringForm() {
         return current
       }, null)
 
-      await addDoc(collection(db, COLLECTIONS.NOISE_READINGS), {
+      const payload = {
         roId, roName,
         industryId:      form.industryId,
         industryName:    form.industryName,
@@ -119,6 +120,13 @@ export default function NoiseMonitoringForm() {
         isSimulated:     false,
         submittedBy:     currentUser.uid,
         createdAt:       serverTimestamp(),
+      }
+
+      const readingRef = await addDoc(collection(db, COLLECTIONS.NOISE_READINGS), payload)
+      await orchestrateReadingSubmission({
+        readingType: 'noise',
+        readingId: readingRef.id,
+        reading: payload,
       })
       navigate('/reports/noise')
     } catch (err) {

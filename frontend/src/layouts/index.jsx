@@ -3,6 +3,7 @@ import { Outlet } from 'react-router-dom'
 import Sidebar from '../components/common/Sidebar'
 import Topbar  from '../components/common/Topbar'
 import { NotificationProvider } from '../contexts/NotificationContext'
+import cecbLogo from '../assets/cecb-logo.svg'
 
 // ─────────────────────────────────────────────────────────────
 //  AppLayout — authenticated pages with sidebar + topbar
@@ -54,12 +55,12 @@ export function PublicLayout() {
       {/* Minimal public header */}
       <header className="bg-primary-700 text-white py-3 px-6 flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="w-7 h-7 bg-eco-400 rounded-lg flex items-center justify-center text-white font-bold text-xs">
-            P
+          <div className="flex h-11 w-11 items-center justify-center overflow-hidden rounded-xl bg-white/12 p-1">
+            <img src={cecbLogo} alt="CECB" className="h-full w-full object-contain" />
           </div>
           <div>
             <p className="font-semibold text-sm">PrithviNet</p>
-            <p className="text-primary-300 text-xs">Environment Department, Chhattisgarh</p>
+            <p className="text-primary-300 text-xs">Chattisgarh Environment Conservation Board</p>
           </div>
         </div>
         <span className="text-xs bg-eco-600 text-white px-2 py-1 rounded-full">

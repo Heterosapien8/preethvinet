@@ -4,6 +4,7 @@ import { collection, addDoc, getDocs, serverTimestamp, query, orderBy } from 'fi
 import { db } from '../../../config/firebase'
 import { useAuth } from '../../../contexts/AuthContext'
 import { COLLECTIONS, AIR_MONITORING_SUBTYPES } from '../../../config/constants'
+import { orchestrateReadingSubmission } from '../../../services/clientFunctionBridge'
 import { ArrowLeft, PlusCircle, Trash2, Save } from 'lucide-react'
 import { calculateAQI } from '../../../utils/aqiCalculator'
 
@@ -77,6 +78,7 @@ export default function AirMonitoringForm() {
     // Basic validation
     const errs = {}
     if (!form.industryId)       errs.industryId       = 'Required'
+    if (!form.locationId)       errs.locationId       = 'Required'
     if (!form.dateOfMonitoring) errs.dateOfMonitoring = 'Required'
     if (Object.keys(errs).length) { setErrors(errs); return }
 
@@ -103,7 +105,7 @@ export default function AirMonitoringForm() {
         })
       }
 
-      await addDoc(collection(db, COLLECTIONS.AIR_READINGS), {
+      const payload = {
         roId,
         roName,
         industryId:       form.industryId,
@@ -122,6 +124,13 @@ export default function AirMonitoringForm() {
         isSimulated:      false,
         submittedBy:      currentUser.uid,
         createdAt:        serverTimestamp(),
+      }
+
+      const readingRef = await addDoc(collection(db, COLLECTIONS.AIR_READINGS), payload)
+      await orchestrateReadingSubmission({
+        readingType: 'air',
+        readingId: readingRef.id,
+        reading: payload,
       })
       navigate('/reports/air')
     } catch (err) {
@@ -147,7 +156,7 @@ export default function AirMonitoringForm() {
 
       <form onSubmit={handleSubmit} className="space-y-5">
         {errors._form && (
-          <div className="p-3 bg-red-50 border border-red-200 rounded-lg text-sm text-red-700">{errors._form}</div>
+          <div className="alert-solid-error rounded-lg text-sm">{errors._form}</div>
         )}
 
         {/* Section 1: Report Metadata */}
@@ -190,11 +199,12 @@ export default function AirMonitoringForm() {
 
             {/* Location */}
             <div>
-              <label className="block text-xs font-medium text-gray-600 mb-1">Location</label>
-              <select value={form.locationId} onChange={e => setField('locationId', e.target.value)} className="input-base">
+              <label className="block text-xs font-medium text-gray-600 mb-1">Location <span className="text-red-500">*</span></label>
+              <select value={form.locationId} onChange={e => setField('locationId', e.target.value)} className={`input-base ${errors.locationId ? 'border-red-400' : ''}`}>
                 <option value="">-- Select Location --</option>
                 {locations.map(l => <option key={l.id} value={l.id}>{l.name}</option>)}
               </select>
+              {errors.locationId && <p className="text-xs text-red-500 mt-1">{errors.locationId}</p>}
             </div>
 
             {/* Date of monitoring */}

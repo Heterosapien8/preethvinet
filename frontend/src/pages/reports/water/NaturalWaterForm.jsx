@@ -4,6 +4,7 @@ import { collection, addDoc, getDocs, serverTimestamp, query, orderBy } from 'fi
 import { db } from '../../../config/firebase'
 import { useAuth } from '../../../contexts/AuthContext'
 import { COLLECTIONS } from '../../../config/constants'
+import { orchestrateReadingSubmission } from '../../../services/clientFunctionBridge'
 import { ArrowLeft, PlusCircle, Trash2, Save } from 'lucide-react'
 
 // Parameters for natural water analysis with prescribed limits
@@ -113,7 +114,7 @@ export default function NaturalWaterForm() {
         BOD: computeAverage(samplesWithFlags, 'BOD'),
       }
 
-      await addDoc(collection(db, COLLECTIONS.WATER_READINGS), {
+      const payload = {
         roId, roName,
         industryId:          form.industryId,
         industryName:        form.industryName,
@@ -138,6 +139,13 @@ export default function NaturalWaterForm() {
         isSimulated:         false,
         submittedBy:         currentUser.uid,
         createdAt:           serverTimestamp(),
+      }
+
+      const readingRef = await addDoc(collection(db, COLLECTIONS.WATER_READINGS), payload)
+      await orchestrateReadingSubmission({
+        readingType: 'water',
+        readingId: readingRef.id,
+        reading: payload,
       })
       navigate('/reports/water')
     } catch (err) {
@@ -163,7 +171,7 @@ export default function NaturalWaterForm() {
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-5">
-        {errors._form && <div className="p-3 bg-red-50 border border-red-200 rounded-lg text-sm text-red-700">{errors._form}</div>}
+        {errors._form && <div className="alert-solid-error rounded-lg text-sm">{errors._form}</div>}
 
         {/* Metadata */}
         <div className="card">
