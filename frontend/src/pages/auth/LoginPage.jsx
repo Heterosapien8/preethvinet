@@ -2,7 +2,8 @@ import { useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { useAuth } from '../../contexts/AuthContext'
 import { ROLES } from '../../config/constants'
-import { Leaf, Eye, EyeOff, AlertCircle } from 'lucide-react'
+import { Eye, EyeOff, AlertCircle } from 'lucide-react'
+import cecbLogo from '../../assets/cecb-logo.svg'
 
 // Role redirect map — where each role lands after login
 const ROLE_HOME = {
@@ -56,15 +57,15 @@ export default function LoginPage() {
         {/* Header strip */}
         <div className="bg-primary-700 px-8 py-6 text-center">
           <div className="flex justify-center mb-3">
-            <div className="w-12 h-12 bg-eco-400 rounded-xl flex items-center justify-center shadow-lg">
-              <Leaf size={24} className="text-white" />
+            <div className="flex h-14 w-14 items-center justify-center overflow-hidden rounded-xl bg-white/12 p-1.5 shadow-lg">
+              <img src={cecbLogo} alt="CECB" className="h-full w-full object-contain" />
             </div>
           </div>
           <h1 className="text-white font-bold text-lg leading-tight">
-            Environment Department
+            PrithviNet
           </h1>
           <p className="text-primary-200 text-sm mt-0.5">
-            Chhattisgarh Government
+            Chattisgarh Environment Conservation Board
           </p>
         </div>
 

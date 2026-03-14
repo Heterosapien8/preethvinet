@@ -108,8 +108,14 @@ function getAuthErrorMessage(code) {
     'auth/user-not-found':         'No account found with this email.',
     'auth/wrong-password':         'Incorrect password.',
     'auth/invalid-credential':     'Invalid email or password.',
+    'auth/invalid-login-credentials': 'Invalid email or password.',
+    'auth/operation-not-allowed':  'Email/password sign-in is not enabled for this Firebase project.',
+    'auth/configuration-not-found': 'Firebase Authentication is not configured correctly for this app.',
+    'auth/app-not-authorized':     'This app is not authorized to use Firebase Authentication with the current API key.',
+    'auth/api-key-not-valid':      'The Firebase web API key is invalid or restricted incorrectly.',
+    'auth/project-not-found':      'The configured Firebase project could not be found.',
     'auth/too-many-requests':      'Too many failed attempts. Please try again later.',
     'auth/network-request-failed': 'Network error. Please check your connection.',
   }
-  return messages[code] ?? 'Login failed. Please try again.'
+  return messages[code] ?? `Login failed. Firebase returned: ${code ?? 'unknown error'}`
 }
