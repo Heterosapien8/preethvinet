@@ -1,15 +1,16 @@
 import { NavLink, useNavigate } from 'react-router-dom'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import {
   LayoutDashboard, Building2, Factory, Ruler, AlertTriangle,
   MapPin, Users, UserCog, Wind, Droplets, Volume2, BarChart3,
   Map, TrendingUp, ShieldCheck, Globe, Ticket, ChevronDown,
-  ChevronRight, LogOut, Settings,
+  ChevronRight, LogOut, Settings, ClipboardList,
 } from 'lucide-react'
 import { useAuth } from '../../contexts/AuthContext'
 import { ROLES } from '../../config/constants'
 import clsx from 'clsx'
 import cecbLogo from '../../assets/cecb-logo.svg'
+import { subscribeToSubmittedApplicationsCount } from '../../services/firestore/industryApplicationsService'
 
 // ─────────────────────────────────────────────────────────────
 //  Navigation structure — role-filtered in the component
@@ -71,6 +72,12 @@ const NAV_ITEMS = [
     roles: [ROLES.SUPER_ADMIN, ROLES.REGIONAL_OFFICER],
   },
   {
+    label: 'Applications',
+    icon: ClipboardList,
+    path: '/admin/applications',
+    roles: [ROLES.SUPER_ADMIN],
+  },
+  {
     label: 'Citizen Portal',
     icon: Globe,
     path: '/public',
@@ -92,6 +99,12 @@ export default function Sidebar({ collapsed, onToggle }) {
   const { role, userProfile, logout } = useAuth()
   const navigate = useNavigate()
   const [openGroups, setOpenGroups] = useState(['Master Records', 'Reports'])
+  const [submittedCount, setSubmittedCount] = useState(0)
+
+  useEffect(() => {
+    if (role !== ROLES.SUPER_ADMIN) return undefined
+    return subscribeToSubmittedApplicationsCount(setSubmittedCount)
+  }, [role])
 
   // Filter nav items by role
   const visibleItems = NAV_ITEMS.filter(item =>
@@ -224,7 +237,16 @@ export default function Sidebar({ collapsed, onToggle }) {
               )}
             >
               <Icon size={18} className="flex-shrink-0" />
-              {!collapsed && <span>{item.label}</span>}
+              {!collapsed && (
+                <>
+                  <span>{item.label}</span>
+                  {item.path === '/admin/applications' && submittedCount > 0 && (
+                    <span className="ml-auto rounded-full bg-amber-400 px-2 py-0.5 text-[11px] font-semibold text-amber-950">
+                      {submittedCount}
+                    </span>
+                  )}
+                </>
+              )}
             </NavLink>
           )
         })}

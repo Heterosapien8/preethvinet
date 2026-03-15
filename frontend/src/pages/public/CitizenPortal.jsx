@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { collection, onSnapshot } from 'firebase/firestore'
 import { db } from '../../config/firebase'
 import { COLLECTIONS } from '../../config/constants'
@@ -131,6 +132,26 @@ export default function CitizenPortal() {
                 {summary.cityName}
               </button>
             ))}
+          </div>
+        </div>
+      </div>
+
+      <div className="rounded-[28px] border border-primary-100 bg-gradient-to-r from-primary-700 via-primary-600 to-eco-700 px-8 py-7 text-white shadow-sm">
+        <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
+          <div className="max-w-2xl">
+            <p className="text-[10px] uppercase tracking-[0.35em] text-primary-100">Industry Services</p>
+            <h2 className="mt-2 text-3xl font-semibold">Register your industry directly inside PrithviNet</h2>
+            <p className="mt-3 text-sm text-primary-50/90">
+              Upload a digital PDF for AI-assisted auto-fill, complete the 3-step registration flow, and track your application without creating an account.
+            </p>
+          </div>
+          <div className="flex flex-col gap-3 sm:flex-row">
+            <Link to="/register" className="rounded-full bg-white px-5 py-3 text-sm font-semibold text-primary-700 transition hover:bg-primary-50">
+              Register Industry
+            </Link>
+            <Link to="/register/status" className="rounded-full border border-white/30 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/10">
+              Check Application Status
+            </Link>
           </div>
         </div>
       </div>

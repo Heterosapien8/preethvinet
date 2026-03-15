@@ -18,6 +18,7 @@ import {
 import { format } from 'date-fns'
 import clsx from 'clsx'
 import AIChatWidget from '../../components/ai/AIChatWidget'
+import SensorControlPanel from '../../components/admin/SensorControlPanel'
 
 export default function Dashboard() {
   const { role, roId, userProfile } = useAuth()
@@ -184,6 +185,8 @@ export default function Dashboard() {
 
   return (
     <div className="space-y-6">
+      <SensorControlPanel />
+
       <div className="card">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
           <div>

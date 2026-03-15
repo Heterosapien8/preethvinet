@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { AuthProvider } from './contexts/AuthContext'
+import { SensorSimulationProvider } from './contexts/SensorSimulationContext'
 import { AppLayout, AuthLayout, PublicLayout } from './layouts/index'
 import ProtectedRoute from './components/common/ProtectedRoute'
 import { ROLES } from './config/constants'
@@ -40,6 +41,9 @@ import EscalationBoard     from './pages/compliance/EscalationBoard'
 import HeatmapPage    from './pages/map/HeatmapPage'
 import ForecastPage   from './pages/forecast/ForecastPage'
 import CitizenPortal  from './pages/public/CitizenPortal'
+import IndustryRegistrationPage from './pages/registration/IndustryRegistrationPage'
+import ApplicationStatusPage from './pages/registration/ApplicationStatusPage'
+import IndustryApplicationsPage from './pages/admin/IndustryApplicationsPage'
 
 // ── Stub & Error pages ──────────────────────────────────────────
 import StubPage from './components/common/StubPage'
@@ -53,7 +57,8 @@ export default function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
-        <Routes>
+        <SensorSimulationProvider>
+          <Routes>
 
           {/* ── Public / Auth routes ────────────────────────────── */}
           <Route element={<AuthLayout />}>
@@ -63,6 +68,8 @@ export default function App() {
           {/* ── Public Citizen Portal (no auth) ────────────────── */}
           <Route element={<PublicLayout />}>
             <Route path="/public" element={<CitizenPortal />} />
+            <Route path="/register" element={<IndustryRegistrationPage />} />
+            <Route path="/register/status" element={<ApplicationStatusPage />} />
           </Route>
 
           {/* ── Error pages ─────────────────────────────────────── */}
@@ -170,12 +177,14 @@ export default function App() {
               <Route path="profile" element={<StubPage title="User Profile"    description="Manage your account details and password." />} />
               <Route path="support" element={<StubPage title="Support Tickets" description="Raise and track support tickets and unlock requests." />} />
             </Route>
+            <Route path="/admin/applications" element={<ProtectedRoute allowedRoles={ADMIN_ONLY}><IndustryApplicationsPage /></ProtectedRoute>} />
           </Route>
 
           {/* Catch-all */}
           <Route path="*" element={<Navigate to="/dashboard" replace />} />
 
-        </Routes>
+          </Routes>
+        </SensorSimulationProvider>
       </AuthProvider>
     </BrowserRouter>
   )

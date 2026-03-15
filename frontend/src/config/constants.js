@@ -16,6 +16,7 @@ export const COLLECTIONS = {
   USERS:                'users',
   REGIONAL_OFFICES:     'regionalOffices',
   INDUSTRIES:           'industries',
+  INDUSTRY_APPLICATIONS:'industryApplications',
   MONITORING_LOCATIONS: 'monitoringLocations',
   UNITS:                'units',
   PRESCRIBED_LIMITS:    'prescribedLimits',
